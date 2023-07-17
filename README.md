@@ -40,6 +40,10 @@ Users should be able to:
 
 ![image](https://github.com/anotherinthefire/rest-countries-api-with-color-theme-switcher/assets/107034155/5760ec8d-60bd-4363-8f02-0e74f626b373)
 
+![image](https://github.com/anotherinthefire/rest-countries-api-with-color-theme-switcher/assets/107034155/7724b068-afea-40b1-bbba-74f4f12eef03)
+
+![image](https://github.com/anotherinthefire/rest-countries-api-with-color-theme-switcher/assets/107034155/a9e16f1d-e57f-4edb-9cb1-376ddd9ed52a)
+
 
 
 ### Links
