@@ -36,34 +36,26 @@ Users should be able to:
 ### Screenshot
 
 ![](./screenshot.jpg)
+![image](https://github.com/anotherinthefire/rest-countries-api-with-color-theme-switcher/assets/107034155/4a2cb151-7991-4195-84ea-b6920f38dfe6)
 
-Add a screenshot of your solution. The easiest way to do this is to use Firefox to view your project, right-click the page and select "Take a Screenshot". You can choose either a full-height screenshot or a cropped one based on how long the page is. If it's very long, it might be best to crop it.
+![image](https://github.com/anotherinthefire/rest-countries-api-with-color-theme-switcher/assets/107034155/5760ec8d-60bd-4363-8f02-0e74f626b373)
 
-Alternatively, you can use a tool like [FireShot](https://getfireshot.com/) to take the screenshot. FireShot has a free option, so you don't need to purchase it. 
 
-Then crop/optimize/edit your image however you like, add it to your project, and update the file path in the image above.
-
-**Note: Delete this note and the paragraphs above when you add your screenshot. If you prefer not to add a screenshot, feel free to remove this entire section.**
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Solution URL: [soon](https://your-solution-url.com)
+- Live Site URL: [Country App](https://rest-countries-api-with-color-theme-switcher-bay-one.vercel.app/)
 
 ## My process
 
 ### Built with
-
-- Semantic HTML5 markup
-- CSS custom properties
-- Flexbox
-- CSS Grid
-- Mobile-first workflow
 - [React](https://reactjs.org/) - JS library
-- [Next.js](https://nextjs.org/) - React framework
-- [Styled Components](https://styled-components.com/) - For styles
+- [Vite](https://vitejs.dev/)
+- [TailwindCSS](https://tailwindcss.com/) - For styles
+- [react-router-v6](https://reactrouter.com/en/main)_
+- [axios](https://axios-http.com/)
 
-**Note: These are just examples. Delete this note and replace the list above with your own choices**
 
 ### What I learned
 
@@ -71,56 +63,108 @@ Use this section to recap over some of your major learnings while working throug
 
 To see how you can add code snippets, see below:
 
-```html
-<h1>Some HTML code I'm proud of</h1>
-```
-```css
-.proud-of-this-css {
-  color: papayawhip;
-}
-```
-```js
-const proudOfThisFunc = () => {
-  console.log('🎉')
-}
 ```
 
-If you want more help with writing markdown, we'd recommend checking out [The Markdown Guide](https://www.markdownguide.org/) to learn more.
+    const [countries, setCountries] = useState([]);
+    const [searchText, setSearchText] = useState("");
+    const [isLoading, setIsLoading] = useState(true); 
 
-**Note: Delete this note and the content within this section and replace with your own learnings.**
+    useEffect(() => {
+        const getCountries = async () => {
+            try {
+                const res = await axios.get("https://restcountries.com/v3.1/all");
+                const data = res.data;
+                setCountries(data);
+                setIsLoading(false);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+        getCountries();
+    }, []);
+
+    async function searchCountry() {
+        setIsLoading(true); 
+        try {
+            const res = await axios.get(
+                `https://restcountries.com/v3.1/name/${searchText}`
+            );
+            const data = res.data;
+            setCountries(data);
+            setIsLoading(false);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    async function filterByRegion(region) {
+        setIsLoading(true);
+        try {
+            const res = await axios.get(
+                `https://restcountries.com/v3.1/region/${region}`
+            );
+            const data = res.data;
+            setCountries(data);
+            setIsLoading(false);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    function handleSearchCountry(e) {
+        e.preventDefault();
+        searchCountry();
+    }
+
+    function handleFilterByRegion(e) {
+        e.preventDefault();
+        filterByRegion();
+    }
+```
+
+dark mode
+```
+const [theme, setTheme] = useState(null)
+
+    useEffect(() => {
+        if (window.matchMedia('(prefer-color-scheme:dark)').matches) {
+            setTheme('dark')
+        } else {
+            setTheme('light')
+        }
+    }, [])
+
+    useEffect(() => {
+        if (theme === 'dark') {
+            document.documentElement.classList.add('dark')
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+    }, [theme])
+
+    const handleThemeSwitch = () => {
+        setTheme(theme === 'dark' ? 'light' : 'dark')
+    }
+```
 
 ### Continued development
 
-Use this section to outline areas that you want to continue focusing on in future projects. These could be concepts you're still not completely comfortable with or techniques you found useful that you want to refine and perfect.
+Add other dropdown design and display it in nav/header
 
-**Note: Delete this note and the content within this section and replace with your own plans for continued development.**
 
-### Useful resources
-
-- [Example resource 1](https://www.example.com) - This helped me for XYZ reason. I really liked this pattern and will use it going forward.
-- [Example resource 2](https://www.example.com) - This is an amazing article which helped me finally understand XYZ. I'd recommend it to anyone still learning this concept.
-
-**Note: Delete this note and replace the list above with resources that helped you during the challenge. These could come in handy for anyone viewing your solution or for yourself when you look back on this project in the future.**
 
 ## Author
 
-- Website - [Add your name here](https://www.your-site.com)
-- Frontend Mentor - [@yourusername](https://www.frontendmentor.io/profile/yourusername)
-- Twitter - [@yourusername](https://www.twitter.com/yourusername)
-
-**Note: Delete this note and add/remove/edit lines above based on what links you'd like to share.**
-
-## Acknowledgments
-
-This is where you can give a hat tip to anyone who helped you out on this project. Perhaps you worked in a team or got some inspiration from someone else's solution. This is the perfect place to give them some credit.
-
-**Note: Delete this note and edit this section's content as necessary. If you completed this challenge by yourself, feel free to delete this section entirely.**
-
+- Website - [Ron Ultra]([https://www.your-site.com](https://suntzaur-portfolio.vercel.app/))
+- Frontend Mentor - [@suntzaur]([https://www.frontendmentor.io/profile/yourusername](https://www.frontendmentor.io/profile/anotherinthefire))
+  
 
 install react js using vite
 install tailwind
 install react router dom
 
+if you want different dropdown
+```
 design dropdown but can not see the existing region filtered
     const [isOpen, setIsOpen] = useState(false);
 
@@ -171,3 +215,4 @@ design dropdown but can not see the existing region filtered
     </div>
   </div>
 </form>
+```
