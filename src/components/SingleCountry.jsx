@@ -68,13 +68,13 @@ export default function SingleCountry() {
                   <h3 className="text-gray-900 font-bold text-lg mb-2 dark:text-white">
                     Borders:
                   </h3>
+                  
                   <ul className="flex flex-wrap items-start justify-start gap-2">
                     {item.borders.map((border, index) => (
-                      <li
-                        key={index}
-                        className="bg-white p-2 rounded text-xs tracking-wide shadow dark:bg-gray-800 dark:text-gray-400 text-gray-700"
-                      >
-                        {border}
+                      <li key={index} className="bg-white p-2 rounded text-xs tracking-wide shadow dark:bg-gray-800 dark:text-gray-400 text-gray-700">
+                        <Link to={`/${border}`}>
+                          {border}
+                        </Link>
                       </li>
                     ))}
                   </ul>
