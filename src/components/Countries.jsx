@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Article from "./Article";
+import Loader from "./Loader";
 
 export default function Countries() {
     const [countries, setCountries] = useState([]);
     const [searchText, setSearchText] = useState("");
+    const [isLoading, setIsLoading] = useState(true); 
     const regions = [
         {
             name: "Asia",
@@ -36,32 +38,37 @@ export default function Countries() {
                 const res = await axios.get("https://restcountries.com/v3.1/all");
                 const data = res.data;
                 setCountries(data);
+                setIsLoading(false);
             } catch (error) {
                 console.error(error);
             }
-        }
+        };
         getCountries();
     }, []);
 
     async function searchCountry() {
+        setIsLoading(true); 
         try {
             const res = await axios.get(
                 `https://restcountries.com/v3.1/name/${searchText}`
             );
             const data = res.data;
             setCountries(data);
+            setIsLoading(false);
         } catch (error) {
             console.error(error);
         }
     }
 
     async function filterByRegion(region) {
+        setIsLoading(true);
         try {
             const res = await axios.get(
                 `https://restcountries.com/v3.1/region/${region}`
             );
             const data = res.data;
             setCountries(data);
+            setIsLoading(false);
         } catch (error) {
             console.error(error);
         }
@@ -79,10 +86,8 @@ export default function Countries() {
 
     return (
         <>
-            {!countries ? (
-                <h1 className="text-gray-900 font-bold uppercase tracking-wide flex items-center justify-center text-center h-screen text-4xl dark:text-white">
-                    Loading...
-                </h1>
+            {isLoading ? (
+                <Loader />
             ) : (
                 <section className="container mx-auto p-8 text-gray-800">
                     {/* form */}
